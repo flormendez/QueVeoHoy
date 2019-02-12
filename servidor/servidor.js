@@ -17,6 +17,7 @@ app.use(
 app.use(bodyParser.json());
 
 app.get("/peliculas", controller.devolverTodas);
+app.get("/generos", controller.devolverGeneros);
 
 //seteamos el puerto en el cual va a escuchar los pedidos la aplicación
 var puerto = "8080";
