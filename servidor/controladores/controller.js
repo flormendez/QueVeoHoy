@@ -19,7 +19,7 @@ function armarConsulta(req) {
     sql = sql.concat(" genero_id = " + req.query.genero);
     var hayFiltro = true;
   }
-  if (req.query.aio) {
+  if (req.query.anio) {
     if (hayFiltro) {
       sql = sql.concat(" and ");
     }
@@ -70,7 +70,42 @@ function devolverGeneros(req, res) {
     res.send(JSON.stringify(response));
   });
 }
+
+function peliculaPorId(id, res) {
+  var sql =
+    "SELECT * FROM pelicula LEFT JOIN actor_pelicula ON pelicula.id = actor_pelicula.pelicula_id JOIN actor ON actor_pelicula.actor_id = actor.id where pelicula.id=" +
+    id +
+    ";";
+  con.query(sql, function(error, resultado) {
+    var generoSql =
+      "SELECT * FROM genero where id=" + resultado[0].genero_id + ";";
+    con.query(generoSql, function(error, resultadoGenero) {
+      var actores = [];
+      var pelicula = {
+        titulo: resultado[0].titulo,
+        duracion: resultado[0].duracion,
+        director: resultado[0].director,
+        poster: resultado[0].poster,
+        anio: resultado[0].anio,
+        fecha_lanzamiento: resultado[0].fecha_lanzamiento,
+        trama: resultado[0].trama,
+        puntuacion: resultado[0].puntuacion,
+        nombre: resultadoGenero[0].nombre
+      };
+      resultado.forEach(element => {
+        actores.push(element);
+      });
+      var respuesta = {
+        pelicula: pelicula,
+        actores: actores
+      };
+      res.send(respuesta);
+    });
+  });
+}
+
 module.exports = {
   devolverTodas: devolverTodas,
-  devolverGeneros: devolverGeneros
+  devolverGeneros: devolverGeneros,
+  peliculaPorId: peliculaPorId
 };

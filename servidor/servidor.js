@@ -18,6 +18,10 @@ app.use(bodyParser.json());
 
 app.get("/peliculas", controller.devolverTodas);
 app.get("/generos", controller.devolverGeneros);
+app.get("/peliculas/:id", function(req, res) {
+  var id = req.params.id;
+  controller.peliculaPorId(id, res);
+});
 
 //seteamos el puerto en el cual va a escuchar los pedidos la aplicación
 var puerto = "8080";
