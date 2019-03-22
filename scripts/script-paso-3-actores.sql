@@ -1,20 +1,10 @@
--- CREATE TABLE `peliculas`.`actor_pelicula` (
---   `id` INT NOT NULL,
---   `actor_id` INT NULL,
---   `pelicula_id` INT NULL,
---   PRIMARY KEY (`id`),
---   INDEX `actor_id_idx` (`actor_id` ASC) VISIBLE,
---   INDEX `pelicula_id_idx` (`pelicula_id` ASC) VISIBLE,
---   CONSTRAINT `actor_id`
---     FOREIGN KEY (`actor_id`)
---     REFERENCES `peliculas`.`actor` (`id`)
---     ON DELETE NO ACTION
---     ON UPDATE NO ACTION,
---   CONSTRAINT `pelicula_id`
---     FOREIGN KEY (`pelicula_id`)
---     REFERENCES `peliculas`.`pelicula` (`id`)
---     ON DELETE NO ACTION
---     ON UPDATE NO ACTION);
+USE peliculas;
+
+CREATE TABLE `actor` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(70) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
 
 INSERT INTO `actor` (`id`, `nombre`)
 VALUES

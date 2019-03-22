@@ -1,3 +1,12 @@
+USE peliculas;
+
+CREATE TABLE `genero` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+);
+
+
 INSERT INTO `genero` (`id`, `nombre`)
 VALUES
 	(1,'Action'),
